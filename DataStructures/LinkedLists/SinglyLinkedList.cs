@@ -35,6 +35,8 @@ public class SinglyLinkedList<T> : ILinkedList<T>
 
     public SinglyLinkedList(IEnumerable<T> values)
     {
+        ArgumentNullException.ThrowIfNull(values);
+        
         foreach (var value in values)
         {
             AddAtTail(value);
