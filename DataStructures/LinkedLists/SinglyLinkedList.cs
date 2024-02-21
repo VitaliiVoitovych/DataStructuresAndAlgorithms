@@ -88,17 +88,24 @@ public class SinglyLinkedList<T> : ILinkedList<T>
     public void InsertBefore(T element, T value)
     {
         if (Head is null) return;
-
-        var node = Search(element);
-        var current = Head;
-
-        while (current!.Next != node)
+        
+        if (Head.Data!.Equals(element))
         {
-            current = current.Next;
+            AddAtHead(value);
         }
-
-        current.Next = new SinglyNode<T>(value) { Next = node };
-        _count++;
+        else
+        {
+            var previous = default(SinglyNode<T>);
+            var current = Head;
+            while (current != null && !current.Data!.Equals(element))
+            {
+                previous = current;
+                current = current.Next;
+            }
+        
+            previous!.Next = current != null ? new SinglyNode<T>(value) { Next = current } : throw new NullReferenceException("Not Found");
+            _count++;
+        }
     }
 
     public void RemoveFromHead()
@@ -118,19 +125,22 @@ public class SinglyLinkedList<T> : ILinkedList<T>
     public void Remove(T element)
     {
         if (Head is null) return;
-
-        var node = Search(element) ?? throw new NullReferenceException("Not found");
-        if (Head == node)
+        
+        if (Head.Data!.Equals(element))
         {
-            Head = node.Next;
+            Head = Head.Next;
         }
         else
         {
+            var previous = default(SinglyNode<T>);
             var current = Head;
-            while (current!.Next != node)
+            while (current != null && !current.Data!.Equals(element))
+            {
+                previous = current;
                 current = current.Next;
+            }
 
-            current.Next = node.Next;
+            previous!.Next = current != null ? current.Next : throw new NullReferenceException("Not found");
         }
         _count--;
     }
