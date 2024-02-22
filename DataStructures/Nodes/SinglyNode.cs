@@ -2,7 +2,7 @@ namespace DataStructures.Nodes;
 
 public class SinglyNode<T>
 {
-    public T Data { get; set; }
+    public T Data { get; init; }
 
     public SinglyNode<T>? Next { get; internal set; }
 
