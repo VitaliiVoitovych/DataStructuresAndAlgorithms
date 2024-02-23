@@ -3,7 +3,7 @@ using DataStructures.Nodes;
 
 namespace DataStructures.LinkedLists;
 
-public class SinglyLinkedList<T> : ILinkedList<T>
+public class CircularLinkedList<T> : ILinkedList<T>
 {
     private int _count;
     public SinglyNode<T>? Head { get; private set; }
@@ -12,16 +12,16 @@ public class SinglyLinkedList<T> : ILinkedList<T>
 
     public int Count => _count;
     
-    public SinglyLinkedList()
+    public CircularLinkedList()
     {
     }
 
-    public SinglyLinkedList(T value)
+    public CircularLinkedList(T value)
     {
         SetHeadAndTail(value);
     }
 
-    public SinglyLinkedList(IEnumerable<T> values)
+    public CircularLinkedList(IEnumerable<T> values)
     {
         ArgumentNullException.ThrowIfNull(values);
         
@@ -34,6 +34,7 @@ public class SinglyLinkedList<T> : ILinkedList<T>
     private void SetHeadAndTail(T value)
     {
         Head = Tail = new SinglyNode<T>(value);
+        Tail.Next = Head;
         _count = 1;
     }
 
@@ -53,6 +54,7 @@ public class SinglyLinkedList<T> : ILinkedList<T>
             return;
         }
         Head = new SinglyNode<T>(value) { Next = Head };
+        Tail!.Next = Head;
         _count++;
     }
 
@@ -63,8 +65,8 @@ public class SinglyLinkedList<T> : ILinkedList<T>
             SetHeadAndTail(value);
             return;
         }
-
-        Tail = Tail.Next = new SinglyNode<T>(value);
+        
+        Tail = Tail.Next = new SinglyNode<T>(value) { Next = Head };
         _count++;
     }
 
@@ -132,6 +134,7 @@ public class SinglyLinkedList<T> : ILinkedList<T>
         else if (Head.Data!.Equals(element))
         {
             Head = Head.Next;
+            Tail!.Next = Head;
         }
         else
         {
@@ -152,7 +155,7 @@ public class SinglyLinkedList<T> : ILinkedList<T>
     public SinglyNode<T>? Search(T element)
     {
         var current = Head;
-        while (current != null && !current.Data!.Equals(element))
+        while (current != null && current != Head && !current.Data!.Equals(element))
         {
             current = current.Next;
         }
@@ -163,7 +166,7 @@ public class SinglyLinkedList<T> : ILinkedList<T>
     public IEnumerator<T> GetEnumerator()
     {
         var current = Head;
-        while (current != null)
+        while (current != null && current != Head)
         {
             yield return current.Data;
             current = current.Next;

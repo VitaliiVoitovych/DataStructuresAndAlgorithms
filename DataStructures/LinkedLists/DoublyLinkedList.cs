@@ -81,7 +81,7 @@ public class DoublyLinkedList<T> : ILinkedList<T>
             return;
         }
         
-        node.Next!.Previous = node.Next = new DoublyNode<T>(value) { Previous = node, Next = node.Next};
+        node.Next = node.Next!.Previous = new DoublyNode<T>(value) { Previous = node, Next = node.Next};
         _count++;
     }
 
@@ -95,7 +95,7 @@ public class DoublyLinkedList<T> : ILinkedList<T>
             return;
         }
         
-        node.Previous!.Next = node.Previous = new DoublyNode<T>(value) { Previous = node.Previous, Next = node};
+        node.Previous = node.Previous!.Next = new DoublyNode<T>(value) { Previous = node.Previous, Next = node};
         _count++;
     }
 
