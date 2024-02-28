@@ -1,4 +1,4 @@
-namespace DataStructures.LinkedLists;
+namespace DataStructures.LinkedLists.Interfaces;
 
 public interface ILinkedList<T> : IEnumerable<T>
 {

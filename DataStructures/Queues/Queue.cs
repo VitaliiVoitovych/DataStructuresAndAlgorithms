@@ -1,9 +1,10 @@
 using System.Collections;
 using DataStructures.Nodes;
+using DataStructures.Queues.Interfaces;
 
 namespace DataStructures.Queues;
 
-public class Queue<T> : IEnumerable<T>
+public class Queue<T> : IQueue<T>
 {
     private int _count;
 

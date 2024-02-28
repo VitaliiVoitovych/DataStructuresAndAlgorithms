@@ -1,5 +1,6 @@
 using System.Collections;
 using DataStructures.Nodes;
+using DataStructures.Stacks.Interfaces;
 
 namespace DataStructures.Stacks;
 
@@ -7,7 +8,7 @@ namespace DataStructures.Stacks;
 /// Based on Singly Linked List
 /// </summary>
 /// <typeparam name="T">Specifies the type of elements in the stack.</typeparam>
-public class Stack<T> : IEnumerable<T>
+public class Stack<T> : IStack<T>
 {
     private int _count;
     
