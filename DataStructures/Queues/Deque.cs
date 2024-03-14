@@ -17,7 +17,10 @@ public class Deque<T> : IDeque<T>
     {
     }
 
-    public Deque(T value) => SetFrontAndBack(value);
+    public Deque(T value)
+    {
+        SetFrontAndBack(value);
+    }
 
     public Deque(IEnumerable<T> values)
     {
@@ -118,20 +121,14 @@ public class Deque<T> : IDeque<T>
     public IEnumerator<T> GetEnumerator()
     {
         var current = Front;
-        while (current != null)
+        while (current is not null)
         {
             yield return current.Data;
             current = current.Next;
         }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public override string ToString()
-    {
-        return $"Deque : {Count} elements";
-    }
+    public override string ToString() => $"Deque : {Count} elements";
 }

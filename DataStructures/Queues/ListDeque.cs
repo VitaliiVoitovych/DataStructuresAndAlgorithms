@@ -83,13 +83,9 @@ public class ListDeque<T> : IDeque<T>
         return _dequeList[^1];
     }
     
-    public IEnumerator<T> GetEnumerator()
-    {
-        return _dequeList.GetEnumerator();
-    }
+    public IEnumerator<T> GetEnumerator() => _dequeList.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public override string ToString() => $"Deque : {Count} elements";
 }

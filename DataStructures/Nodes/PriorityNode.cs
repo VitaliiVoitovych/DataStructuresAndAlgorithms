@@ -14,8 +14,5 @@ public class PriorityNode<T>
         Priority = priority;
     }
 
-    public override string ToString()
-    {
-        return $"{Data} with {Priority} priority";
-    }
+    public override string ToString() => $"{Data} with {Priority} priority";
 }

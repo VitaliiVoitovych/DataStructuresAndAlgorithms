@@ -1,9 +1,8 @@
-using System;
 using DataStructures.Nodes;
 
 namespace DataStructures.Queues;
 
-public class PriorityQueue<T>
+public class LinkedPriorityQueue<T>
 {
     private int _count;
 
@@ -11,12 +10,23 @@ public class PriorityQueue<T>
     
     public int Count => _count;
 
-    public PriorityQueue()
+    public LinkedPriorityQueue()
     {
     }
 
-    public PriorityQueue(T value, int priority) => Enqueue(value, priority);
+    public LinkedPriorityQueue(T value, int priority)
+    {
+        Enqueue(value, priority);
+    }
+    
+    public bool IsEmpty() => Head is null;
 
+    public void Clear()
+    {
+        Head = null;
+        _count = 0;
+    }
+    
     public void Enqueue(T value, int priority)
     {
         if (Head is null)
@@ -33,7 +43,7 @@ public class PriorityQueue<T>
         {
             var previous = default(PriorityNode<T>);
             var current = Head;
-            while (current != null && current.Priority > priority)
+            while (current is not null && current.Priority > priority)
             {
                 previous = current;
                 current = current.Next;
@@ -61,4 +71,6 @@ public class PriorityQueue<T>
         
         return Head.Data;
     }
+
+    public override string ToString() => $"Priority Queue: {Count} elements";
 }

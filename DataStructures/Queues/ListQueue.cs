@@ -61,13 +61,9 @@ public class ListQueue<T> : IQueue<T>
         return _queueList[0];
     }
     
-    public IEnumerator<T> GetEnumerator()
-    {
-        return _queueList.GetEnumerator();
-    }
+    public IEnumerator<T> GetEnumerator() => _queueList.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public override string ToString() => $"Queue: {Count} elements";
 }

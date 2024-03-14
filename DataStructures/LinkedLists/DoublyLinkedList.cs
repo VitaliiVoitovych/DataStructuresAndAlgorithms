@@ -145,7 +145,7 @@ public class DoublyLinkedList<T> : ILinkedList<T>
     public DoublyNode<T>? Search(T element)
     {
         var current = Head;
-        while (current != null && !current.Data!.Equals(element))
+        while (current is not null && !current.Data!.Equals(element))
         {
             current = current.Next;
         }
@@ -156,20 +156,14 @@ public class DoublyLinkedList<T> : ILinkedList<T>
     public IEnumerator<T> GetEnumerator()
     {
         var current = Head;
-        while (current != null)
+        while (current is not null)
         {
             yield return current.Data;
             current = current.Next;
         }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public override string ToString()
-    {
-        return $"Doubly Linked List: {Count} elements";
-    }
+    public override string ToString() => $"Doubly Linked List: {Count} elements";
 }

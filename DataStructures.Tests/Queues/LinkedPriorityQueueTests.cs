@@ -2,12 +2,12 @@ using DataStructures.Queues;
 
 namespace DataStructures.Tests.Queues;
 
-public class PriorityQueueTests
+public class LinkedPriorityQueueTests
 {
     [Fact]
     public void Enqueue()
     {
-        var priorityQueue = new PriorityQueue<int>();
+        var priorityQueue = new LinkedPriorityQueue<int>();
 
         priorityQueue.Enqueue(120, 30);
         priorityQueue.Enqueue(220, 10);
@@ -21,7 +21,7 @@ public class PriorityQueueTests
     [Fact]
     public void Dequeue()
     {
-        var priorityQueue = new PriorityQueue<int>();
+        var priorityQueue = new LinkedPriorityQueue<int>();
 
         priorityQueue.Enqueue(120, 30);
         priorityQueue.Enqueue(220, 10);
@@ -29,8 +29,9 @@ public class PriorityQueueTests
         priorityQueue.Enqueue(201, 40);
         priorityQueue.Enqueue(320, 15);
 
-        priorityQueue.Dequeue();
+        var value = priorityQueue.Dequeue();
         
         Assert.Equal(4, priorityQueue.Count);
+        Assert.Equal(201, value);
     }
 }

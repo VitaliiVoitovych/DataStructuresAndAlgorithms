@@ -31,8 +31,11 @@ public class ListStack<T> : IStack<T>
     }
 
     public bool IsEmpty() => Count < 1;
-    
-    public void Clear() => _stackList.Clear();
+
+    public void Clear()
+    {
+        _stackList.Clear();
+    }
 
     public void Push(T value)
     {
@@ -55,13 +58,9 @@ public class ListStack<T> : IStack<T>
         return _stackList[^1];
     }
     
-    public IEnumerator<T> GetEnumerator()
-    {
-        return _stackList.GetEnumerator();
-    }
+    public IEnumerator<T> GetEnumerator() => _stackList.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public override string ToString() => $"Stack: {Count} elements";
 }

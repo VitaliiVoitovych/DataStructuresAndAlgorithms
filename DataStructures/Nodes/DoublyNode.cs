@@ -9,8 +9,5 @@ public class DoublyNode<T>
 
     public DoublyNode(T data) => Data = data;
 
-    public override string? ToString()
-    {
-        return Data?.ToString();
-    }
+    public override string? ToString() => Data?.ToString();
 }

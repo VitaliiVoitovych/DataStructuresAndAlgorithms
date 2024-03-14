@@ -151,7 +151,7 @@ public class CircularDoublyLinkedList<T> : ILinkedList<T>
     public DoublyNode<T>? Search(T element)
     {
         var current = Head;
-        while (current != null && current.Next != Head && !current.Data!.Equals(element))
+        while (current is not null && current.Next != Head && !current.Data!.Equals(element))
         {
             current = current.Next;
         }
@@ -162,20 +162,14 @@ public class CircularDoublyLinkedList<T> : ILinkedList<T>
     public IEnumerator<T> GetEnumerator()
     {
         var current = Head;
-        while (current != null && current.Next != Head)
+        while (current is not null && current.Next != Head)
         {
             yield return current.Data;
             current = current.Next;
         }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public override string ToString()
-    {
-        return $"Doubly Linked List: {Count} elements";
-    }
+    public override string ToString() => $"Doubly Linked List: {Count} elements";
 }

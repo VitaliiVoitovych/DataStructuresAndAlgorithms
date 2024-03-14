@@ -99,13 +99,13 @@ public class CircularLinkedList<T> : ILinkedList<T>
         {
             var previous = default(SinglyNode<T>);
             var current = Head;
-            while (current != null && !current.Data!.Equals(element))
+            while (current is not null && !current.Data!.Equals(element))
             {
                 previous = current;
                 current = current.Next;
             }
         
-            previous!.Next = current != null ? new SinglyNode<T>(value) { Next = current } : throw new NullReferenceException("Not Found");
+            previous!.Next = current is not null ? new SinglyNode<T>(value) { Next = current } : throw new NullReferenceException("Not Found");
             _count++;
         }
     }
@@ -141,7 +141,7 @@ public class CircularLinkedList<T> : ILinkedList<T>
         {
             var previous = default(SinglyNode<T>);
             var current = Head;
-            while (current != null && !current.Data!.Equals(element))
+            while (current is not null && !current.Data!.Equals(element))
             {
                 previous = current;
                 current = current.Next;
@@ -156,7 +156,7 @@ public class CircularLinkedList<T> : ILinkedList<T>
     public SinglyNode<T>? Search(T element)
     {
         var current = Head;
-        while (current != null && current != Head && !current.Data!.Equals(element))
+        while (current is not null && current != Head && !current.Data!.Equals(element))
         {
             current = current.Next;
         }
@@ -167,20 +167,14 @@ public class CircularLinkedList<T> : ILinkedList<T>
     public IEnumerator<T> GetEnumerator()
     {
         var current = Head;
-        while (current != null && current != Head)
+        while (current is not null && current != Head)
         {
             yield return current.Data;
             current = current.Next;
         }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public override string ToString()
-    {
-        return $"Singly Linked List: {Count} elements";
-    }
+    public override string ToString() => $"Singly Linked List: {Count} elements";
 }

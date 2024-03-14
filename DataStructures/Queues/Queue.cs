@@ -17,7 +17,10 @@ public class Queue<T> : IQueue<T>
     {
     }
 
-    public Queue(T value) => Enqueue(value);
+    public Queue(T value)
+    {
+        Enqueue(value);
+    }
 
     public Queue(IEnumerable<T> values)
     {
@@ -74,15 +77,14 @@ public class Queue<T> : IQueue<T>
     public IEnumerator<T> GetEnumerator()
     {
         var current = Front;
-        while (current != null)
+        while (current is not null)
         {
             yield return current.Data;
             current = current.Next;
         }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public override string ToString() => $"Queue: {Count} elements";
 }
